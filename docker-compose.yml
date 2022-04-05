@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  site1_proxy:
+    build:
+      context: ./docker
+    networks:
+      - test_network
+    ports:
+      - "30001:80"
+    volumes:
+      - "./site1/public:/var/www/site1/public"
+      - "./site1/sites-enable:/etc/apache2/sites-enabled"
+    container_name: site1_proxy
+
+  site2_proxy:
+    build:
+      context: ./docker
+    networks:
+      - test_network
+    ports:
+      - "30002:80"
+    volumes:
+      - "./site2/public:/var/www/site2/public"
+      - "./site2/sites-enable:/etc/apache2/sites-enabled"
+    container_name: site2_proxy
+
+# networks
+networks:
+  test_network:
